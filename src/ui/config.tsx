@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { inject, observer, Provider } from 'mobx-react';
 import configStore, { ConfigStoreType } from '../store/config';
 import github, { User } from '../domain/github/client';
+import slack, { SlackMessage } from '../domain/slack/client';
 
 type Props = {
   store?: ConfigStoreType;
@@ -55,6 +56,7 @@ class Config extends Component<Props> {
             onChange={e => this.changeSlackToken(e)}
           />
           <button onClick={() => this.checkSlack()}>接続テスト</button>
+          <div>{store ? store.slackMessage : ''}</div>
         </div>
       </div>
     );
@@ -127,12 +129,15 @@ class Config extends Component<Props> {
       return;
     }
     const store = this.props.store;
-    const token = store.githubToken;
+    const token = store.slackToken;
     if (token == null) {
-      store.setGitHubMessage('tokenが設定されていません');
+      store.setSlackMessage('tokenが設定されていません');
       return;
     }
-    console.log(token);
+    slack.getMyMessages(token).then(messages => {
+      console.log(messages);
+      store.setSlackMessage('接続成功');
+    });
   }
 }
 
