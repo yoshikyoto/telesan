@@ -5,10 +5,12 @@ export type ConfigStoreType = {
   updateIntervalMinute: number;
   githubToken: string | null;
   githubEndpoint: string | null;
+  githubMessage: string;
   setUpdateIntervalMinute: (updateIntervalMinute: number) => void;
   setGitHubToken: (token: string | null) => void;
   setGitHubEndpoint: (endpoint: string | null) => void;
   getGitHubEndpoint: string;
+  setGitHubMessage: (message: string) => void;
 };
 
 class ConfigStore {
@@ -19,6 +21,9 @@ class ConfigStore {
   @observable githubToken: string | null = storage.getGitHubToken();
 
   @observable githubEndpoint: string | null = storage.getGitHubEndpoint();
+
+  // Token と Endpoint のチェックをした時の結果メッセージ
+  @observable githubMessage: string = '';
 
   @action setUpdateIntervalMinute(updateIntervalMinute: number): void {
     storage.setUpdateIntervalMinute(updateIntervalMinute);
@@ -32,8 +37,11 @@ class ConfigStore {
   }
 
   @action setGitHubEndpoint(endpoint: string | null): void {
+    console.log('setGitHubEndpoint');
     storage.setGitHubEndpoint(endpoint);
-    if (endpoint) this.githubToken = endpoint;
+    if (endpoint != null) {
+      this.githubEndpoint = endpoint;
+    }
   }
 
   // computed は property みたいに呼び出すことになるけど、
@@ -43,6 +51,10 @@ class ConfigStore {
       return 'https://api.github.com';
     }
     return this.githubEndpoint;
+  }
+
+  @action setGitHubMessage(message: string): void {
+    this.githubMessage = message;
   }
 }
 

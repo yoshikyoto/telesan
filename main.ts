@@ -12,6 +12,9 @@ const createWindow = (): void => {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
       contextIsolation: true,
+      // Electron アプリから GitHub などの Web API を叩くときに
+      // cross-site でも叩けるようにする
+      webSecurity: false,
     },
   });
 
