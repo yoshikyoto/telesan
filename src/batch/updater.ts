@@ -1,20 +1,37 @@
 import { ConfigStoreType } from '../store/config';
 import github from '../domain/github/client';
+import productivity from '../domain/productivity';
+import Status from '../domain/status';
+import { StatusStoreType } from '../store/status';
 
 export default class Updater {
-  store: ConfigStoreType;
+  configStore: ConfigStoreType;
+  statusStore: StatusStoreType;
 
-  constructor(store: ConfigStoreType) {
-    this.store = store;
+  constructor(configStore: ConfigStoreType, statusStore: StatusStoreType) {
+    this.configStore = configStore;
+    this.statusStore = statusStore;
   }
 
   start() {
     setInterval(() => {
       this.update();
-    }, this.store.updateIntervalMinute * 1000 * 60);
+    }, this.configStore.updateIntervalMinute * 1000 * 5);
   }
 
   update() {
-    github.getActivity();
+    console.log('update');
+    this.updateGitHub();
+  }
+
+  updateGitHub() {
+    const endpoint = this.configStore.getGitHubEndpoint;
+    const token = this.configStore.githubToken;
+    if (token == null) {
+      return;
+    }
+    github.getEvents(endpoint, token).then(githubEvents => {
+      productivity.convertGitHubEvents(githubEvents);
+    });
   }
 }
