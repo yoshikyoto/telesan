@@ -1,5 +1,4 @@
 import { app, BrowserWindow } from 'electron';
-import path from 'path';
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
