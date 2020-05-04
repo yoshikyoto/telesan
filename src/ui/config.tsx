@@ -47,6 +47,15 @@ class Config extends Component<Props> {
           <button onClick={() => this.checkGitHub()}>接続テスト</button>
         </div>
         <div>{store ? store.githubMessage : ''}</div>
+        <div>
+          Slack token:
+          <input
+            type="text"
+            defaultValue={store && store.slackToken ? store.slackToken : ''}
+            onChange={e => this.changeSlackToken(e)}
+          />
+          <button onClick={() => this.checkSlack()}>接続テスト</button>
+        </div>
       </div>
     );
   }
@@ -103,6 +112,27 @@ class Config extends Component<Props> {
       .catch(() => {
         store.setGitHubMessage('接続に失敗しました');
       });
+  }
+
+  changeSlackToken(event: React.ChangeEvent<HTMLInputElement>) {
+    // https://api.slack.com/legacy/custom-integrations/legacy-tokens
+    if (!this.props.store) {
+      return;
+    }
+    this.props.store.setSlackToken(event.target.value);
+  }
+
+  checkSlack() {
+    if (!this.props.store) {
+      return;
+    }
+    const store = this.props.store;
+    const token = store.githubToken;
+    if (token == null) {
+      store.setGitHubMessage('tokenが設定されていません');
+      return;
+    }
+    console.log(token);
   }
 }
 

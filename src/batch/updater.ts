@@ -1,7 +1,6 @@
 import { ConfigStoreType } from '../store/config';
 import github from '../domain/github/client';
 import productivity from '../domain/productivity';
-import Status from '../domain/status';
 import { StatusStoreType } from '../store/status';
 
 export default class Updater {
@@ -16,7 +15,7 @@ export default class Updater {
   start() {
     setInterval(() => {
       this.update();
-    }, this.configStore.updateIntervalMinute * 1000 * 5);
+    }, this.configStore.updateIntervalMinute * 1000 * 10);
   }
 
   update() {
@@ -31,7 +30,8 @@ export default class Updater {
       return;
     }
     github.getEvents(endpoint, token).then(githubEvents => {
-      productivity.convertGitHubEvents(githubEvents);
+      const statusDelta = productivity.convertGitHubEvents(githubEvents);
+      this.statusStore.addStatus(statusDelta);
     });
   }
 }

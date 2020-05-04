@@ -9,7 +9,7 @@ export type StatusStoreType = {
 };
 
 class StatusStore {
-  @observable status: Status = new Status(0, 0, 0);
+  @observable status: Status = Status.blank;
 
   @observable lastDelta: Status | null = null;
 

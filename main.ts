@@ -9,12 +9,12 @@ const createWindow = (): void => {
     width: 1200,
     height: 600,
     webPreferences: {
-      nodeIntegration: false,
-      nodeIntegrationInWorker: false,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
       contextIsolation: true,
       // Electron アプリから GitHub などの Web API を叩くときに
       // cross-site でも叩けるようにする
-      webSecurity: false,
+      // webSecurity: false,
     },
   });
 

@@ -6,11 +6,16 @@ export type ConfigStoreType = {
   githubToken: string | null;
   githubEndpoint: string | null;
   githubMessage: string;
+  slackToken: string | null;
+  slackMessage: string;
+
   setUpdateIntervalMinute: (updateIntervalMinute: number) => void;
   setGitHubToken: (token: string | null) => void;
   setGitHubEndpoint: (endpoint: string | null) => void;
   getGitHubEndpoint: string;
   setGitHubMessage: (message: string) => void;
+  setSlackToken: (token: string | null) => void;
+  setSlackMessage: (message: string) => void;
 };
 
 class ConfigStore {
@@ -24,6 +29,11 @@ class ConfigStore {
 
   // Token と Endpoint のチェックをした時の結果メッセージ
   @observable githubMessage: string = '';
+
+  @observable slackToken: string | null = storage.getSlackToken();
+
+  // Token と のチェックをした時の結果メッセージ
+  @observable slackMessage: string = '';
 
   @action setUpdateIntervalMinute(updateIntervalMinute: number): void {
     storage.setUpdateIntervalMinute(updateIntervalMinute);
@@ -55,6 +65,15 @@ class ConfigStore {
 
   @action setGitHubMessage(message: string): void {
     this.githubMessage = message;
+  }
+
+  @action setSlackToken(token: string | null): void {
+    storage.setSlackToken(token);
+    this.slackToken = token;
+  }
+
+  @action setSlackMessage(message: string): void {
+    this.slackMessage = message;
   }
 }
 

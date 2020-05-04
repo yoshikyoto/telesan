@@ -40,6 +40,18 @@ class LocalStorageWrapper {
   getGitHubEndpoint(): string | null {
     return localStorage.getItem('githubEndpoint');
   }
+
+  setSlackToken(value: string | null) {
+    if (value == null) {
+      localStorage.removeItem('slackToken');
+    } else {
+      localStorage.setItem('slackToken', value);
+    }
+  }
+
+  getSlackToken(): string | null {
+    return localStorage.getItem('slackToken');
+  }
 }
 
 const storage = new LocalStorageWrapper();

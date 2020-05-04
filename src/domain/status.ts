@@ -1,4 +1,6 @@
 export default class Status {
+  static readonly blank = new Status(0, 0, 0);
+
   /** HP */
   health: number;
 
