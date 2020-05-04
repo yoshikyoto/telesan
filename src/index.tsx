@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import App from './ui/app';
 
 const container = document.getElementById('contents');
 
-ReactDom.render(<p>こんにちは、世界</p>, container);
+ReactDom.render(<App />, container);
