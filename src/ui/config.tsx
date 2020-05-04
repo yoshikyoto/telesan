@@ -16,16 +16,27 @@ class Config extends Component<Props> {
       <div>
         <h1>設定</h1>
         <Link to="/">閉じる</Link>
-        <input type="text" onChange={e => this.handleTestChange(e)} />
-        <div>{store ? store.test : ''}</div>
+        <div>
+          ステータス更新間隔:
+          <input type="text" onChange={e => this.handleTestChange(e)} /> 分
+        </div>
+        <div>debug: {store ? store.test : ''}</div>
       </div>
     );
   }
 
   handleTestChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (this.props.store) {
-      this.props.store.changeTest(event.target.value);
+    if (!this.props.store) {
+      return;
     }
+    const value = Number(event.target.value);
+    if (isNaN(value)) {
+      return;
+    }
+    if (value < 1) {
+      return;
+    }
+    this.props.store.changeTest(value);
   }
 }
 
