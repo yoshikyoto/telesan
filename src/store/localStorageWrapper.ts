@@ -52,6 +52,18 @@ class LocalStorageWrapper {
   getSlackToken(): string | null {
     return localStorage.getItem('slackToken');
   }
+
+  setNetworkEnabled(value: boolean): void {
+    if (value === true) {
+      localStorage.setItem('networkEnabled', 'true');
+    } else {
+      localStorage.removeItem('networkEnabled');
+    }
+  }
+
+  getNetworkEnabled(): boolean {
+    return localStorage.getItem('networkEnabled') === 'true';
+  }
 }
 
 const storage = new LocalStorageWrapper();

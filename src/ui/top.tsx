@@ -4,6 +4,7 @@ import { inject, observer, Provider } from 'mobx-react';
 import statusStore, { StatusStoreType } from '../store/status';
 import Status from '../domain/status';
 import StatusChart from './statusChart';
+import Monster from './monster';
 
 type Props = {
   statusStore?: StatusStoreType;
@@ -24,6 +25,7 @@ class Top extends Component<Props> {
         <h1>あなたのモンスター</h1>
         <Link to="/config">設定</Link>
         <StatusChart status={status} lastDelta={lastDelta} />
+        <Monster status={status} />
       </div>
     );
   }

@@ -8,6 +8,7 @@ export type ConfigStoreType = {
   githubMessage: string;
   slackToken: string | null;
   slackMessage: string;
+  isNetworkEnabled: boolean;
 
   setUpdateIntervalMinute: (updateIntervalMinute: number) => void;
   setGitHubToken: (token: string | null) => void;
@@ -16,6 +17,7 @@ export type ConfigStoreType = {
   setGitHubMessage: (message: string) => void;
   setSlackToken: (token: string | null) => void;
   setSlackMessage: (message: string) => void;
+  setNetworkEnabled: (value: boolean) => void;
 };
 
 class ConfigStore {
@@ -34,6 +36,8 @@ class ConfigStore {
 
   // Token と のチェックをした時の結果メッセージ
   @observable slackMessage: string = '';
+
+  @observable isNetworkEnabled: boolean = storage.getNetworkEnabled();
 
   @action setUpdateIntervalMinute(updateIntervalMinute: number): void {
     storage.setUpdateIntervalMinute(updateIntervalMinute);
@@ -74,6 +78,11 @@ class ConfigStore {
 
   @action setSlackMessage(message: string): void {
     this.slackMessage = message;
+  }
+
+  @action setNetworkEnabled(value: boolean): void {
+    storage.setNetworkEnabled(value);
+    this.isNetworkEnabled = value;
   }
 }
 

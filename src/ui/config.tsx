@@ -27,6 +27,14 @@ class Config extends Component<Props> {
           />
           分
         </div>
+        <div>
+          ステータスを他の人に公開する:
+          <input
+            type="checkbox"
+            onChange={e => this.toggleNetwork(e)}
+            defaultChecked={store ? store.isNetworkEnabled : false}
+          />
+        </div>
         <div>debug: {store ? store.updateIntervalMinute : ''}</div>
         <div>
           GitHub endpoint:
@@ -138,6 +146,14 @@ class Config extends Component<Props> {
       console.log(messages);
       store.setSlackMessage('接続成功');
     });
+  }
+
+  toggleNetwork(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!this.props.store) {
+      return;
+    }
+    const store = this.props.store;
+    store.setNetworkEnabled(event.target.checked);
   }
 }
 
