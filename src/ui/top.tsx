@@ -24,6 +24,7 @@ class Top extends Component<Props> {
       <div>
         <h1>あなたのモンスター</h1>
         <Link to="/config">設定</Link>
+        <Link to="/team">チームを見る</Link>
         <StatusChart status={status} lastDelta={lastDelta} />
         <Monster status={status} />
       </div>
