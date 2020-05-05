@@ -1,5 +1,7 @@
 name: Node.js CI
 
+# push をトリガーとしてビルドする
+# push の内容がタグ付けだった時はリリースまで行う
 on: push
 
 jobs:
@@ -8,6 +10,7 @@ jobs:
 
     strategy:
       matrix:
+        # ほんとは全部のOSでリリースしたいが、うまく動かないのがあるので macos のみ
         # os: [macos-latest, ubuntu-latest, windows-latest]
         os: [macos-latest]
 
@@ -18,5 +21,6 @@ jobs:
           node-version: 12.x
       - uses: samuelmeuli/action-electron-builder@v1
         with:
+          # secrets.GITHUB_TOKEN は特に設定しなくてもデフォルトで使えるらしい
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
