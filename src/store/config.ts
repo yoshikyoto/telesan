@@ -105,7 +105,7 @@ class ConfigStore {
   }
 
   @computed get teamWithNlSeparatedNames(): string {
-    return this.team.replace(',', '\n');
+    return this.team.replace(/,/g, '\n');
   }
 }
 

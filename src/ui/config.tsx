@@ -187,7 +187,7 @@ class Config extends Component<Props> {
       return;
     }
     const store = this.props.store;
-    store.setTeam(event.target.value.trim().replace('\n', ','));
+    store.setTeam(event.target.value.trim().replace(/\n/g, ','));
   }
 }
 

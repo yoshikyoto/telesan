@@ -17,5 +17,10 @@ jobs:
         with:
           node-version: 12.x
       - run: npm install
-      - name: yarn run dist
-
+      - run: yarn run dist
+      - name: いらない成果物を消す
+        run: npx rimraf "dist/!(*.exe|*.deb|*.AppImage|*.dmg)"
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.os }}
+          path: dist
