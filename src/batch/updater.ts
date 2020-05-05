@@ -1,6 +1,7 @@
 import { ConfigStoreType } from '../store/config';
 import github from '../domain/github/client';
 import slack from '../domain/slack/client';
+import telesanNet from '../domain/telesanNet/client';
 import productivity from '../domain/productivity';
 import { StatusStoreType } from '../store/status';
 import Status from '../domain/status';
@@ -43,6 +44,10 @@ export default class Updater {
     }
 
     this.statusStore.addStatus(statusDelta);
+
+    if (this.configStore.isNetworkEnabled) {
+      telesanNet.postMonster('yoshiyuki-sakamoto', this.statusStore.status);
+    }
   }
 
   updateGitHub(token: string) {

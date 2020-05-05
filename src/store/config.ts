@@ -9,6 +9,7 @@ export type ConfigStoreType = {
   slackToken: string | null;
   slackMessage: string;
   isNetworkEnabled: boolean;
+  name: string | null;
 
   setUpdateIntervalMinute: (updateIntervalMinute: number) => void;
   setGitHubToken: (token: string | null) => void;
@@ -18,6 +19,7 @@ export type ConfigStoreType = {
   setSlackToken: (token: string | null) => void;
   setSlackMessage: (message: string) => void;
   setNetworkEnabled: (value: boolean) => void;
+  setName: (name: string) => void;
 };
 
 class ConfigStore {
@@ -38,6 +40,8 @@ class ConfigStore {
   @observable slackMessage: string = '';
 
   @observable isNetworkEnabled: boolean = storage.getNetworkEnabled();
+
+  @observable name: string | null = storage.getName();
 
   @action setUpdateIntervalMinute(updateIntervalMinute: number): void {
     storage.setUpdateIntervalMinute(updateIntervalMinute);
@@ -83,6 +87,11 @@ class ConfigStore {
   @action setNetworkEnabled(value: boolean): void {
     storage.setNetworkEnabled(value);
     this.isNetworkEnabled = value;
+  }
+
+  @action setName(name: string | null): void {
+    storage.setName(name);
+    this.slackToken = name;
   }
 }
 

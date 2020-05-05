@@ -64,6 +64,18 @@ class LocalStorageWrapper {
   getNetworkEnabled(): boolean {
     return localStorage.getItem('networkEnabled') === 'true';
   }
+
+  setName(value: string | null): void {
+    if (value == null) {
+      localStorage.removeItem('name');
+    } else {
+      localStorage.setItem('name', value);
+    }
+  }
+
+  getName(): string | null {
+    return localStorage.getItem('name');
+  }
 }
 
 const storage = new LocalStorageWrapper();
