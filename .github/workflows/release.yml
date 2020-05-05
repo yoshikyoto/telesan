@@ -19,6 +19,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: npm install
       - uses: samuelmeuli/action-electron-builder@v1
         with:
           # secrets.GITHUB_TOKEN は特に設定しなくてもデフォルトで使えるらしい
