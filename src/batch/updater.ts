@@ -45,8 +45,9 @@ export default class Updater {
 
     this.statusStore.addStatus(statusDelta);
 
-    if (this.configStore.isNetworkEnabled) {
-      telesanNet.postMonster('yoshiyuki-sakamoto', this.statusStore.status);
+    // ネットワークが有効で、名前が設定してある場合はネットワークに書き込みに行く
+    if (this.configStore.isNetworkEnabled && this.configStore.name) {
+      telesanNet.postMonster(this.configStore.name, this.statusStore.status);
     }
   }
 

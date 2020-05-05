@@ -35,7 +35,18 @@ class Config extends Component<Props> {
             defaultChecked={store ? store.isNetworkEnabled : false}
           />
         </div>
-        <div>debug: {store ? store.updateIntervalMinute : ''}</div>
+        <div>
+          ID:
+          <input
+            type="text"
+            placeholder="例: utakata@dwango"
+            defaultValue={store && store.name ? store.name : ''}
+            onChange={e => this.changeName(e)}
+            disabled={store ? !store.isNetworkEnabled : true}
+          />
+          <br />
+          （一意な名前にする必要があります。）
+        </div>
         <div>
           GitHub endpoint:
           <input
@@ -65,6 +76,13 @@ class Config extends Component<Props> {
           />
           <button onClick={() => this.checkSlack()}>接続テスト</button>
           <div>{store ? store.slackMessage : ''}</div>
+        </div>
+        <div>チームのみんな</div>
+        <div>
+          <textarea
+            defaultValue={store ? store.teamWithNlSeparatedNames : ''}
+            onChange={e => this.changeTeam(e)}
+          />
         </div>
       </div>
     );
@@ -154,6 +172,22 @@ class Config extends Component<Props> {
     }
     const store = this.props.store;
     store.setNetworkEnabled(event.target.checked);
+  }
+
+  changeName(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!this.props.store) {
+      return;
+    }
+    const store = this.props.store;
+    store.setName(event.target.value);
+  }
+
+  changeTeam(event: React.ChangeEvent<HTMLTextAreaElement>) {
+    if (!this.props.store) {
+      return;
+    }
+    const store = this.props.store;
+    store.setTeam(event.target.value.trim().replace('\n', ','));
   }
 }
 

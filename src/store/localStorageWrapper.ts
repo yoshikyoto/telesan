@@ -76,6 +76,18 @@ class LocalStorageWrapper {
   getName(): string | null {
     return localStorage.getItem('name');
   }
+
+  setTeam(commaSeparatedNames: string): void {
+    localStorage.setItem('team', commaSeparatedNames);
+  }
+
+  getTeam(): string {
+    const value = localStorage.getItem('team');
+    if (value == null) {
+      return '';
+    }
+    return value;
+  }
 }
 
 const storage = new LocalStorageWrapper();

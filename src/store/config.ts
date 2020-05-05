@@ -10,6 +10,7 @@ export type ConfigStoreType = {
   slackMessage: string;
   isNetworkEnabled: boolean;
   name: string | null;
+  team: string;
 
   setUpdateIntervalMinute: (updateIntervalMinute: number) => void;
   setGitHubToken: (token: string | null) => void;
@@ -20,6 +21,8 @@ export type ConfigStoreType = {
   setSlackMessage: (message: string) => void;
   setNetworkEnabled: (value: boolean) => void;
   setName: (name: string) => void;
+  setTeam: (commaSeparatedNames: string) => void;
+  teamWithNlSeparatedNames: string;
 };
 
 class ConfigStore {
@@ -42,6 +45,8 @@ class ConfigStore {
   @observable isNetworkEnabled: boolean = storage.getNetworkEnabled();
 
   @observable name: string | null = storage.getName();
+
+  @observable team: string = storage.getTeam();
 
   @action setUpdateIntervalMinute(updateIntervalMinute: number): void {
     storage.setUpdateIntervalMinute(updateIntervalMinute);
@@ -92,6 +97,15 @@ class ConfigStore {
   @action setName(name: string | null): void {
     storage.setName(name);
     this.slackToken = name;
+  }
+
+  @action setTeam(commaSeparatedNames: string): void {
+    storage.setTeam(commaSeparatedNames);
+    this.team = commaSeparatedNames;
+  }
+
+  @computed get teamWithNlSeparatedNames(): string {
+    return this.team.replace(',', '\n');
   }
 }
 

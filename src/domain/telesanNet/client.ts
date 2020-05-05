@@ -5,7 +5,7 @@ class Client {
   static readonly BASE = 'https://telesan.herokuapp.com';
 
   async postMonster(name: string, status: Status) {
-    console.log('telesannet');
+    console.log('post to telesan-net');
     axios.post(Client.BASE + '/monster', {
       name: name,
       health: status.health,
