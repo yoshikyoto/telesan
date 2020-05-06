@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         # ほんとは全部のOSでリリースしたいが、うまく動かないのがあるので macos のみ
-        # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v2
