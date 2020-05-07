@@ -30,6 +30,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
       },
+      {
+        test: /\.node$/,
+        use: 'file-loader',
+      },
     ],
   },
   resolve: {
@@ -37,6 +41,7 @@ module.exports = {
       '.ts',
       '.tsx',
       '.js', // node_modulesのライブラリ読み込みに必要
+      // '.node', // iconv で必要
     ],
   },
   plugins: [

@@ -3,6 +3,9 @@ import { app, BrowserWindow } from 'electron';
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
 
+// main.ts は webpack でコンパイルされないので、
+// ここを変更した場合は tsc コマンドから実行し直す必要がある
+
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
   const win = new BrowserWindow({
@@ -10,11 +13,8 @@ const createWindow = (): void => {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-      contextIsolation: true,
-      // Electron アプリから GitHub などの Web API を叩くときに
-      // cross-site でも叩けるようにする
-      // webSecurity: false,
+      // nodeIntegrationInWorker: true,
+      //contextIsolation: true,
     },
   });
 

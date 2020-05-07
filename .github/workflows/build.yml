@@ -10,7 +10,6 @@ jobs:
 
     strategy:
       matrix:
-        # ほんとは全部のOSでリリースしたいが、うまく動かないのがあるので macos のみ
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
