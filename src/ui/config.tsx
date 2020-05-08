@@ -30,6 +30,7 @@ class Config extends Component<Props> {
     return (
       <div>
         <h1>設定</h1>
+        <Link to="/">閉じる</Link>
         <div>
           ステータスを他の人に公開する:
           <input
