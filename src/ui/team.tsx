@@ -17,7 +17,6 @@ type Props = {
 @observer
 class Team extends Component<Props> {
   componentDidMount(): void {
-    console.log('team did mount');
     teamUpdater.update();
   }
 

@@ -15,6 +15,10 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+  externals: [
+    // ../build/Debug/iconv.node が iconv から
+    {"../build/Debug/iconv.node": 'debug-iconv-node'},
+  ],
   module: {
     rules: [
       {
@@ -25,14 +29,15 @@ module.exports = {
         loader: 'eslint-loader',
       },
       {
+        test: /\.node$/,
+        use: 'node-loader',
+        exclude: '/Debug/iconv.node',
+      },
+      {
         // typescript のコンパイルの設定
         // 拡張子 .ts または .tsx の場合
         test: /\.tsx?$/,
         use: 'ts-loader',
-      },
-      {
-        test: /\.node$/,
-        use: 'file-loader',
       },
     ],
   },
@@ -41,8 +46,14 @@ module.exports = {
       '.ts',
       '.tsx',
       '.js', // node_modulesのライブラリ読み込みに必要
-      // '.node', // iconv で必要
+      '.node', // iconv で必要
     ],
+  },
+  node: {
+    // active-win を動かすためにこれが必要
+    // active-win には main というシェルスクリプトが動いており
+    // それを webpack のビルドに含める必要がある
+    __dirname: true,
   },
   plugins: [
     // Webpack plugin を利用する

@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "sourceRoot": "./src",
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "typeRoots": ["./src/@types"]
   },
   "files": [
     "main.ts"

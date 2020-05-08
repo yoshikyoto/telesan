@@ -9,12 +9,12 @@ import { app, BrowserWindow } from 'electron';
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
   const win = new BrowserWindow({
-    width: 1200,
+    width: 600,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
       // nodeIntegrationInWorker: true,
-      //contextIsolation: true,
+      // contextIsolation: true,
     },
   });
 
@@ -23,7 +23,7 @@ const createWindow = (): void => {
   win.loadFile('./index.html');
 
   // 開発者ツールを起動する
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。

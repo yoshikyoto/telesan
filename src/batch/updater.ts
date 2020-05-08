@@ -5,6 +5,7 @@ import telesanNet from '../domain/telesanNet/client';
 import productivity from '../domain/productivity';
 import { StatusStoreType } from '../store/status';
 import Status from '../domain/status';
+import activeWindowChecker from '../domain/activeWindow/checker';
 
 export default class Updater {
   configStore: ConfigStoreType;
@@ -16,9 +17,7 @@ export default class Updater {
   }
 
   start() {
-    setInterval(() => {
-      this.update();
-    }, this.configStore.updateIntervalMinute * 1000 * 10);
+    activeWindowChecker.start();
   }
 
   async update() {

@@ -2,18 +2,31 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { inject, observer, Provider } from 'mobx-react';
 import configStore, { ConfigStoreType } from '../store/config';
+import activeWindowStore, {
+  ActiveWindowStoreType,
+} from '../store/activeWindow';
 import github, { User } from '../domain/github/client';
-import slack, { SlackMessage } from '../domain/slack/client';
+import slack from '../domain/slack/client';
 
 type Props = {
   store?: ConfigStoreType;
+  activeWindowStore?: ActiveWindowStoreType;
 };
 
-@inject('store')
+@inject('store', 'activeWindowStore')
 @observer
 class Config extends Component<Props> {
+  getActiveWindows(): { [s: string]: number } {
+    if (this.props.activeWindowStore) {
+      return this.props.activeWindowStore.total;
+    } else {
+      return {};
+    }
+  }
+
   render() {
     const { store } = this.props;
+    const activeWindows = this.getActiveWindows();
     return (
       <div>
         <h1>設定</h1>
@@ -83,6 +96,14 @@ class Config extends Component<Props> {
             defaultValue={store ? store.teamWithNlSeparatedNames : ''}
             onChange={e => this.changeTeam(e)}
           />
+        </div>
+        <div>最近のアクティブウィンドウ</div>
+        <div>
+          {Object.keys(activeWindows).map(activeWindowName => (
+            <div key={activeWindowName}>
+              {activeWindows[activeWindowName]} {activeWindowName}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -194,7 +215,7 @@ class Config extends Component<Props> {
 class ConfigWithProps extends Component {
   render() {
     return (
-      <Provider store={configStore}>
+      <Provider store={configStore} activeWindowStore={activeWindowStore}>
         <Config />
       </Provider>
     );
