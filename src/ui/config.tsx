@@ -30,16 +30,6 @@ class Config extends Component<Props> {
     return (
       <div>
         <h1>設定</h1>
-        <Link to="/">閉じる</Link>
-        <div>
-          ステータス更新間隔:
-          <input
-            type="text"
-            defaultValue={store ? store.updateIntervalMinute : ''}
-            onChange={e => this.changeUpdateInterval(e)}
-          />
-          分
-        </div>
         <div>
           ステータスを他の人に公開する:
           <input
@@ -60,6 +50,7 @@ class Config extends Component<Props> {
           <br />
           （一意な名前にする必要があります。）
         </div>
+        {/*
         <div>
           GitHub endpoint:
           <input
@@ -90,6 +81,7 @@ class Config extends Component<Props> {
           <button onClick={() => this.checkSlack()}>接続テスト</button>
           <div>{store ? store.slackMessage : ''}</div>
         </div>
+        */}
         <div>チームのみんな</div>
         <div>
           <textarea
