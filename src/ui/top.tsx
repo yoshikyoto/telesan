@@ -5,7 +5,6 @@ import statusStore, { StatusStoreType } from '../store/status';
 import Status from '../domain/status';
 import StatusChart from './statusChart';
 import Monster from './monster';
-
 type Props = {
   statusStore?: StatusStoreType;
 };

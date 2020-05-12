@@ -25,7 +25,7 @@ class WindowSize {
 }
 
 class ActiveWindowChecker {
-  static readonly INTERVAL_SECONDS = 60;
+  static readonly INTERVAL_SECONDS = 5;
   start() {
     // 60秒おきにチェック
     setInterval(() => {

@@ -13,6 +13,7 @@
     "@octokit/types": "^2.12.2",
     "@types/active-win": "^5.1.0",
     "@types/axios": "^0.14.0",
+    "@types/material-ui": "^0.21.7",
     "@types/moment": "^2.13.0",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
@@ -50,6 +51,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
     "@octokit/rest": "^17.6.0",
     "active-win": "^6.1.0",
     "axios": "^0.19.2",
