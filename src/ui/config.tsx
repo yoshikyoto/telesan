@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { inject, observer, Provider } from 'mobx-react';
 import configStore, { ConfigStoreType } from '../store/config';
 import activeWindowStore, {
@@ -29,8 +28,6 @@ class Config extends Component<Props> {
     const activeWindows = this.getActiveWindows();
     return (
       <div>
-        <h1>設定</h1>
-        <Link to="/">閉じる</Link>
         <div>
           ステータスを他の人に公開する:
           <input

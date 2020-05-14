@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import teamUpdater from '../domain/team';
-import { Link } from 'react-router-dom';
 import { observer, inject, Provider } from 'mobx-react';
 import statusStore, { StatusStoreType } from '../store/status';
 import teamStore, { TeamStoreType } from '../store/team';
@@ -33,8 +32,6 @@ class Team extends Component<Props> {
       : Status.blank;
     return (
       <div>
-        <h1>チームのみんな</h1>
-        <Link to="/">もどる</Link>
         <div>
           <h2>あなた</h2>
           <StatusChart status={myStatus} lastDelta={myStatusDelta} />

@@ -70,7 +70,8 @@ class Client {
               }
             }
             resolve(events);
-          });
+          })
+          .catch(e => reject(e));
       });
     });
   }

@@ -1,5 +1,4 @@
 import { observable, action, computed } from 'mobx';
-import { number } from 'prop-types';
 import Status from '../domain/status';
 
 export type ActiveWindowStoreType = {
