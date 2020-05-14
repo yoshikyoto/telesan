@@ -1,7 +1,7 @@
 export default class Status {
   static readonly blank = new Status(0, 0, 0);
 
-  static readonly initial = new Status(1, 1, 1);
+  static readonly initial = new Status(10, 10, 10);
 
   /** HP */
   health: number;
