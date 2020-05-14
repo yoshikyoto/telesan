@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import Status from '../domain/status';
+import { withStyles, WithStyles } from '@material-ui/styles';
+import { createStyles } from '@material-ui/core';
 
-type Props = {
+const styles = () =>
+  createStyles({
+    status: {
+      fontWeight: 'bold',
+    },
+  });
+
+interface Props extends WithStyles<typeof styles> {
   status: Status;
   lastDelta: Status;
-};
+}
 
 class StatusChart extends Component<Props> {
   render() {
     const status = this.props.status;
     const lastDelta = this.props.lastDelta;
     return (
-      <div>
+      <div className={this.props.classes.status}>
         <div>
           たいりょく: {status.health}（+{lastDelta.health}）
         </div>
@@ -26,4 +35,4 @@ class StatusChart extends Component<Props> {
   }
 }
 
-export default StatusChart;
+export default withStyles(styles)(StatusChart);
