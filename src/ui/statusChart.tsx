@@ -10,11 +10,23 @@ import {
   PolarRadiusAxis,
   Tooltip,
 } from 'recharts';
+import Grid from '@material-ui/core/Grid';
 
 const styles = () =>
   createStyles({
+    container: {
+      position: 'relative',
+      height: '100px',
+    },
     status: {
-      fontWeight: 'bold',
+      position: 'absolute',
+      top: '0px',
+      left: '0px',
+    },
+    chart: {
+      position: 'absolute',
+      top: '0px',
+      left: '100px',
     },
   });
 
@@ -46,29 +58,33 @@ class StatusChart extends Component<Props> {
     ];
 
     return (
-      <div className={this.props.classes.status}>
-        <div>
-          たいりょく: {status.health}（+{lastDelta.health}）
+      <div className={this.props.classes.container}>
+        <div className={this.props.classes.status}>
+          <div>
+            たいりょく: {status.health}（+{lastDelta.health}）
+          </div>
+          <div>
+            こうげき: {status.attack}（+{lastDelta.attack}）
+          </div>
+          <div>
+            ぼうぎょ: {status.defence}（+{lastDelta.defence}）
+          </div>
         </div>
-        <div>
-          こうげき: {status.attack}（+{lastDelta.attack}）
+        <div className={this.props.classes.chart}>
+          <RadarChart outerRadius={100} width={400} height={300} data={data}>
+            <PolarGrid />
+            <PolarAngleAxis dataKey="subject" />
+            <PolarRadiusAxis angle={90} domain={[0, 300]} />
+            <Radar
+              name="あなたのモンスター"
+              dataKey="you"
+              stroke="#8884d8"
+              fill="#8884d8"
+              fillOpacity={0.6}
+            />
+            <Tooltip />
+          </RadarChart>
         </div>
-        <div>
-          ぼうぎょ: {status.defence}（+{lastDelta.defence}）
-        </div>
-        <RadarChart outerRadius={150} width={500} height={500} data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis angle={90} domain={[0, 300]} />
-          <Radar
-            name="あなたのモンスター"
-            dataKey="You"
-            stroke="#8884d8"
-            fill="#8884d8"
-            fillOpacity={0.6}
-          />
-          <Tooltip />
-        </RadarChart>
       </div>
     );
   }
