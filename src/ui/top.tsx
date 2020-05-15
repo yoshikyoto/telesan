@@ -20,7 +20,6 @@ class Top extends Component<Props> {
         : Status.blank;
     return (
       <div>
-        <h1>あなたのモンスター</h1>
         <StatusChart status={status} lastDelta={lastDelta} />
         <Monster status={status} />
       </div>

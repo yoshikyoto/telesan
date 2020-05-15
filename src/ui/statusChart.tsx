@@ -10,7 +10,6 @@ import {
   PolarRadiusAxis,
   Tooltip,
 } from 'recharts';
-import Grid from '@material-ui/core/Grid';
 
 const styles = () =>
   createStyles({
