@@ -55,7 +55,7 @@
     "@octokit/rest": "^17.6.0",
     "active-win": "^6.1.0",
     "axios": "^0.19.2",
-    "moment": "^2.25.2",
+    "moment": "^2.29.4",
     "recharts": "^1.8.5"
   }
 }
